@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <title>Carte avec Leaflet</title>
+  </head>
+  <body>
+
+     <div id="macarte" style="width:545px; height:490px"></div>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script>
+  //afficher carte
+      var carte = L.map('macarte').setView([46.3630104, 2.9846608], 6);
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(carte);
+
+      //ajouter marqueur perso
+      var avionIcon = L.icon({
+    iconUrl: 'avion.png',
+    iconSize:     [38, 50], // size of the icon
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+  //afficher coordonnees
+      var marker = L.marker([43.184277, 3.003078]).addTo(carte);
+      var marker1 = L.marker([42.6886591, 2.8948331999999937]).addTo(carte);
+      var marker2 = L.marker([34.68508689999999, 135.8050002]).addTo(carte);
+      var marker3 = L.marker([51.5, -0.09], {icon: avionIcon}).addTo(carte);
+
+//afficher des lignes
+//     var eskimon = L.polyline([
+//     [47.077766, -0.219043],
+//     [47.077766, -0.643656],
+//     [46.912911, -0.643656],
+//     [46.912911, -0.219043],
+//     [46.912911, -0.643656],
+//     [46.778871, -0.643656],
+//     [46.778871, -0.219043]
+// ], {color: 'red'}).addTo(carte);
+
+//afficher un cercle sur le marqueur
+var influence = L.circle([43.184277, 3.003078], 21000).addTo(carte);
+
+//afficher un popup sur le marqueur
+  marker2.bindPopup('');
+  var mapopup = marker2.getPopup();
+  mapopup.setContent('COUCOU');
+  marker2.openPopup();
+
+    </script>
+  </body>
+</html>
